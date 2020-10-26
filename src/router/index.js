@@ -13,6 +13,8 @@ import Editpassword from '@/views/admin/userinfo/Editpassword'
 import Homestayindex from '@/views/admin/homestay/Homestayindex'
 import Homestayedit from '@/views/admin/homestay/Homestayedit'
 import EchartsCom from '@/views/admin/echarts/Echarts.vue'
+import Userment from '@/views/admin/userinfo/Userment.vue'
+
 
 Vue.use(VueRouter)
 
@@ -67,6 +69,12 @@ const router = new VueRouter({
           component: Homestayedit,
           name:'homestayedit',
           meta:{auth:true,title:'民宿编辑'},
+        },
+        {
+          path:'/userment',
+          component: Userment,
+          name:'userment',
+          meta:{auth:true,title:'用户管理'},
         },
         {
           path:'/echarts',

@@ -66,7 +66,6 @@ export default {
           if (valid) {
             let url = URL + '/admin/info/editpassword';
             let token = sessionStorage.getItem('token');
-
             axios({
                 url,
                 method:'POST',

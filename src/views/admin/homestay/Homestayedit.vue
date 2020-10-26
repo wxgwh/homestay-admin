@@ -52,7 +52,7 @@
       <el-form-item>
         <el-upload class="avatar-uploader" :action="uploadurl" :on-success="handleBannerSuccess" list-type="picture-card"  multiple :limit="5" :on-remove="handleBannerRemove" :on-preview="handleBannerPreview"   :on-exceed="handleExceed" :file-list="bannerFileList">
            <i class="el-icon-plus"></i>
-          <div slot="tip" class="el-upload__tip">只能上传jpg/png/jpeg/webp文件，且不超过200kb，最佳尺寸比例 1:1，最多五张</div>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png/jpeg/webp文件，且不超过1MB，最佳尺寸比例 1:1，最多五张</div>
         </el-upload>
         <el-dialog :visible.sync="dialogVisible">
           <img width="100%" :src="dialogImageUrl" alt="">
@@ -70,7 +70,7 @@
         <rich-text :value="homestayform.snotice" :menus="['head', 'bold','fontSize','fontName', 'underline', 'strikeThrough']" formfield="snotice" @rich-change="setSontice" ></rich-text>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">提交</el-button>
+        <el-button type="primary" @click="handleSubmit">提交</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -83,13 +83,13 @@ import {SUCCESS,URL,IMGURL} from '@/libs/base.js';
 import loading from '@/components/loading/Loading.vue'
 import instance from '@/http/http.js'
 import RichText from '@/components/richtext/RichText.vue'
-import {homestayRead} from '@/http/homestay.js'
+import {homestayRead,homestayUpdate} from '@/http/homestay.js'
 // import E from 'wangeditor'
 
 import city from '@/libs/city.json'
 
 export default {
-  name: 'Homestayadd',
+  name: 'Homestayedit',
   components:{
     loading,
     RichText
@@ -166,7 +166,7 @@ export default {
 
     handlebeforeUpload(file){
       let {type,size} = file;
-      let uploadMaxSize=200*1024;
+      let uploadMaxSize=1000*1024;
       let uploadType=['image/jpeg','image/jpg','image/png','imagr/webp'];
       let sizeflag=true,typeflag=true;
       sizeflag=size<uploadMaxSize;
@@ -218,7 +218,17 @@ export default {
     setProvince(){
       this.province = this.city.map(ele=>ele.name);
     },
-   
+
+    handleSubmit(){
+      homestayUpdate(this.homestayform).then(res=>{
+        // this.categorys=res.data;
+        // alert(res.data.msg);
+        // this.$message.success(res.data.msg);
+        res
+        // location.reload();
+        this.$router.go(0);
+      }).catch();
+    }
   },
   mounted(){
     let sid = this.$route.params.id;

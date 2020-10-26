@@ -1,5 +1,4 @@
 import instance from '@/http/http.js'
-// import {SUCCESS} from '@/libs/base.js';
 
 
 function homestayRead(sid){
@@ -23,8 +22,25 @@ function homestaySave(data){
     })
 }
 
-function homestayDelete(){
-
+function homestayUpdate(data){
+    return new Promise((resolve,reject)=>{
+        instance.put('/api/homestay/'+data.sid,data).then(res=>{
+            resolve(res)
+        }).catch(error=>{
+            reject(error)
+        })
+    })
 }
 
-export {homestayDelete,homestayRead,homestaySave}
+function homestayDelete(sid){
+    return new Promise((resolve,reject)=>{
+        instance.delete('/api/homestay/'+sid).then(res=>{
+            //   this.categorys = res.data
+            resolve(res);
+        }).catch(error=>{
+            reject(error);
+        })
+    })
+}
+
+export {homestayDelete,homestayRead,homestaySave,homestayUpdate}

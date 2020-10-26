@@ -4,7 +4,7 @@
   <el-header>
     <div class="logo">
       <img src="../../resources/image/logo.jpg" alt="">
-      <span class="animate__animated animate__zoomInDown">XXX后台管理</span>
+      <span class="animate__animated animate__zoomInDown">民宿后台管理</span>
     </div>
     <div class="header-nav">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
@@ -24,10 +24,12 @@
       <el-row class="tac">
         <el-col >
           <el-menu default-active="2" class="el-menu-vertical-demo" >
-            <el-menu-item index="3">
-              <i class="el-icon-user-solid"></i>
-              <span slot="title">用户管理</span>
-            </el-menu-item>
+            <router-link to="/userment">
+              <el-menu-item index="3">
+                <i class="el-icon-user-solid"></i>
+                <span slot="title">用户管理</span>
+              </el-menu-item>
+            </router-link>
             <el-submenu index="4">
               <template slot="title">
                 <i class="el-icon-s-operation"></i>

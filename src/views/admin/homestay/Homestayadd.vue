@@ -256,9 +256,16 @@ export default {
         // this.categorys=res.data;
         // alert(res.data.msg);
         // this.$message.success(res.data.msg);
-        res
+        if(res.code == 300){
+          this.$message.error(res.msg);
+        }
+        if(res.code == 200){
+          this.$message.success(res.msg);
+          setTimeout(()=>{
+            this.$router.go(0);
+          },1000)
+        }
         // location.reload();
-        this.$router.go(0);
       }).catch();
     },
     

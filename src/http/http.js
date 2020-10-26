@@ -21,6 +21,7 @@ instance.interceptors.request.use(function (config){
     return Promise.reject(error);
 });
 
+//相应拦截器
 instance.interceptors.response.use(function(response){
     if(response.status===200){
         return response.data;
